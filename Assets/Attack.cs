@@ -4,28 +4,26 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    
+    
     public Animator animator;
-    public Collider2D HitArea;
+
     // Start is called before the first frame update
     void Start()
     {
-       
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyPressed (KeyCode.Space))
-        {
-            Attacking();
-            HitArea.enabled = true;
-            
-        }
-        else
-        {
-            HitArea.enabled = false;
-        }
         
+        if (Input.GetKeyDown(KeyCode.Space)){
+
+
+            Attacking();
+        }
+
     }
 
     private void Attacking()
@@ -33,5 +31,5 @@ public class Attack : MonoBehaviour
 
         animator.SetTrigger("Attack");
     }
+    
 }
-

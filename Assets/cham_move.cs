@@ -4,36 +4,18 @@ using UnityEngine;
 
 public class cham_move : MonoBehaviour
 {
-    
-    public float speed = 0.5f;
-    //bool crouch = false;
+    public float speed = 5f;  // Adjust the speed value according to your needs
+    public Animator animator;
 
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
     void Update()
     {
-      transform.Translate(Input.GetAxis("Horizontal")*speed*Time.deltaTime, Input.GetAxis("Vertical")*speed*Time.deltaTime, 0);
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float running = horizontalInput * speed;
 
+        animator.SetFloat("running", Mathf.Abs(running));  // Use Mathf.Abs to ensure positive values
 
-
-     // if (Input.GetButtonDown("Crouch")){
-     //   crouch = true;
-     // } else if (Input.GetButtonUp("Crouch")){
-      //  crouch = false;
-      //}
-
-      
-
-
+        // Move the character
+        Vector3 movement = new Vector3(horizontalInput, 0f, 0f);
+        transform.position += movement * speed * Time.deltaTime;
     }
-
-    //public void OnCrouching (bool isCrouching){
-    //    Animator.SetBool("IsCrouching", isCrouching);
-    //}
-
-
-
 }
