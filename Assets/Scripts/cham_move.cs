@@ -6,9 +6,18 @@ public class cham_move : MonoBehaviour
 {
     public float speed = 5f;  // Adjust the speed value according to your needs
     public Animator animator;
+    public new SpriteRenderer renderer;
 
+
+    void Initialization() {
+
+
+
+    }
     void Update()
     {
+
+
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float running = horizontalInput * speed;
 
@@ -17,5 +26,16 @@ public class cham_move : MonoBehaviour
         // Move the character
         Vector3 movement = new Vector3(horizontalInput, 0f, 0f);
         transform.position += movement * speed * Time.deltaTime;
+
+        // Change direction based on input
+        if (horizontalInput < 0)
+        {
+            renderer.flipX = true;
+                   }
+        else if (horizontalInput > 0)
+        {
+            // Moving left
+            renderer.flipX = false;
+        }
     }
 }
