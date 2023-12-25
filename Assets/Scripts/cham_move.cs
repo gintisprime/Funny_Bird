@@ -8,8 +8,7 @@ public class cham_move : MonoBehaviour
     public Animator animator;
     public new SpriteRenderer renderer;
 
-
-    void Initialization() {
+    void Start() {
 
 
 
@@ -27,15 +26,27 @@ public class cham_move : MonoBehaviour
         Vector3 movement = new Vector3(horizontalInput, 0f, 0f);
         transform.position += movement * speed * Time.deltaTime;
 
+        if (Input.GetKey(KeyCode.DownArrow) && (horizontalInput == 0))
+        {
+
+            
+               
+
+        }
+        
+
         // Change direction based on input
         if (horizontalInput < 0)
         {
             renderer.flipX = true;
-                   }
+            
+        }
         else if (horizontalInput > 0)
         {
             // Moving left
             renderer.flipX = false;
         }
+
+
     }
 }

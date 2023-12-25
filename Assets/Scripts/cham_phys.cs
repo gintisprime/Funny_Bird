@@ -7,30 +7,68 @@ public class cham_phys : MonoBehaviour
     public float jumpSpeed = 5;
     public float arlimit = -10;
     public float dexlimit = 9;
+
+    public Animator animator;
     Rigidbody2D rb;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire1")) {
- rb.velocity += new Vector2(0, jumpSpeed);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.velocity += new Vector2(0, jumpSpeed);
+            animator.SetBool("Jumping", true);
+        }
+        else {
+
+            animator.SetBool("Jumping", false);
+        
+        }
+
+
+        if (Input.GetButton("Fire2"))
+        {
+            
+            animator.SetBool("Ducking", true);
+        }
+        else
+        {
+
+            animator.SetBool("Ducking", false);
+
+        }
+        if (transform.position.x < arlimit)
+        {
+            Vector3 v = transform.position;
+            v.x = arlimit;
+            transform.position = v;
+        }
+
+        if (transform.position.x > dexlimit)
+        {
+            Vector3 v = transform.position;
+            v.x = dexlimit;
+            transform.position = v;
+        }
+
+        // Move the spacebar check outside of the x-position limit block
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Attacking();
+        }
     }
 
-            if(transform.position.x < arlimit) {
- Vector3 v = transform.position;
- v.x = arlimit;
- transform.position = v;
- }
-    
+    private void Attacking()
+    {
+        animator.SetTrigger("Attack");
+    }
 
-            if(transform.position.x > dexlimit) {
- Vector3 v = transform.position;
- v.x = dexlimit;
- transform.position = v;
- }
+    private void OnLanding() {
+
+        animator.SetBool("Jumping", false);
     }
 }
