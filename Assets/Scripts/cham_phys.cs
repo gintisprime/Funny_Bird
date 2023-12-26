@@ -7,7 +7,6 @@ public class cham_phys : MonoBehaviour
     public float jumpSpeed = 5;
     public float arlimit = -10;
     public float dexlimit = 9;
-
     public Animator animator;
     Rigidbody2D rb;
 
@@ -67,8 +66,8 @@ public class cham_phys : MonoBehaviour
         animator.SetTrigger("Attack");
     }
 
-    private void OnLanding() {
 
-        animator.SetBool("Jumping", false);
-    }
+
+
+
 }
