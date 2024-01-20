@@ -46,7 +46,10 @@ public class cham_move : MonoBehaviour
             // Moving left
             renderer.flipX = false;
         }
-
+        
 
     }
+   
+
+
 }

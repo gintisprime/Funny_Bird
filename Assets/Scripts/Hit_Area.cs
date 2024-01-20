@@ -11,13 +11,13 @@ public class Hit_Area : MonoBehaviour
     void Start()
     {
         HitArea = GetComponent<Collider2D>();
-
+        HitArea.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
 
             StartCoroutine(enable_hit_area());
