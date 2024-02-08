@@ -6,13 +6,14 @@ public class cham_move : MonoBehaviour
 {
     public float speed = 5f;  // Adjust the speed value according to your needs
     public Animator animator;
-    public new SpriteRenderer renderer;
+    public GameObject Chameleon;
+    public bool flipped;
 
     void Start() {
-
-
-
+        Chameleon = GameObject.Find("Chameleon");
     }
+
+
     void Update()
     {
 
@@ -27,24 +28,28 @@ public class cham_move : MonoBehaviour
         transform.position += movement * speed * Time.deltaTime;
 
         if (Input.GetKey(KeyCode.DownArrow) && (horizontalInput == 0))
-        {
-
-            
-               
+        {    
 
         }
         
 
         // Change direction based on input
-        if (horizontalInput < 0)
+        if (horizontalInput < 0 && !flipped)
         {
-            renderer.flipX = true;
-            
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
+            flipped = true;
+
         }
-        else if (horizontalInput > 0)
+        else if (horizontalInput > 0 && !flipped)
         {
             // Moving left
-            renderer.flipX = false;
+
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
+            flipped = true;
+        }
+
+        if (horizontalInput == 0){
+            flipped = false;
         }
         
 
