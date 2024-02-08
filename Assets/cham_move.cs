@@ -6,33 +6,24 @@ public class cham_move : MonoBehaviour
 {
     
     public float speed = 0.5f;
-    //bool crouch = false;
+    public Animator anim;
+    Vector2 movement;
 
-    void Start()
-    {
+
+    void Start()  {
+      anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
       transform.Translate(Input.GetAxis("Horizontal")*speed*Time.deltaTime, Input.GetAxis("Vertical")*speed*Time.deltaTime, 0);
 
-
-
-     // if (Input.GetButtonDown("Crouch")){
-     //   crouch = true;
-     // } else if (Input.GetButtonUp("Crouch")){
-      //  crouch = false;
-      //}
-
-      
-
-
+      if (Input.GetButtonDown("Fire1")) anim.Play("jump");
     }
 
-    //public void OnCrouching (bool isCrouching){
-    //    Animator.SetBool("IsCrouching", isCrouching);
-    //}
+
+
 
 
 
