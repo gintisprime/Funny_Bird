@@ -8,6 +8,8 @@ public class cham_phys : MonoBehaviour
     public float arlimit = -10;
     public float dexlimit = 9;
 
+    
+
     //Knockback factors
     public float knockbackForce;
 
@@ -15,9 +17,19 @@ public class cham_phys : MonoBehaviour
     Rigidbody2D rb;
     private bool grounded;
 
+    [SerializeField]
+    private BoxCollider2D platformCollider;
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
     void Start()
     {
+
         rb = GetComponent<Rigidbody2D>();
+        platformCollider.size
+             = new Vector2(spriteRenderer.size.x, platformCollider.size.y);
+
+
     }
 
     void Update()
@@ -60,6 +72,9 @@ public class cham_phys : MonoBehaviour
         {
             Attacking();
         }
+
+
+
     }
 
     private void Attacking()
@@ -92,12 +107,34 @@ public class cham_phys : MonoBehaviour
     {
         if (other.tag == "enemy")
         {
-            Vector2 difference = (transform.position - other.transform.position).normalized;
-            Vector2 force = difference * knockbackForce;
-            rb.AddForce(force, ForceMode2D.Force); //if you don't want to take into consideration enemy's mass then use ForceMode.VelocityChange
-            // change to other layer for a bit 
-            //change back again
+            
+            HealthManager.health--;
+
+            if (HealthManager.health <= 0)
+            {
+
+                Player_Manager.isGameOver = true;
+                gameObject.SetActive(false);
+
+            }
+            else { 
+                
+                StartCoroutine(Getting_Hurt()); 
+            }
+           
+
         }
     }
+
+     IEnumerator Getting_Hurt()
+    {
+        GetComponent<Animator>().SetLayerWeight(1, 1);
+        Physics2D.IgnoreLayerCollision(6,7);
+        yield return new WaitForSeconds(3);
+        GetComponent<Animator>().SetLayerWeight(1, 0);
+        Physics2D.IgnoreLayerCollision(6,7, false);
+    }
+
+
 
 }
